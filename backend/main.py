@@ -1,9 +1,37 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.trustedhost import TrustedHostMiddleware
+from fastapi.responses import StreamingResponse
 from youtube import search_videos, get_video_stats
 from analyzer import get_comments, analyze_comments
 from ranker import recency_score, final_score
+import requests
 
 app = FastAPI()
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+@app.get("/proxy-image")
+def proxy_image(url: str):
+    """Proxy images through backend to avoid CORS issues"""
+    try:
+        response = requests.get(url, timeout=10)
+        response.raise_for_status()
+        return StreamingResponse(
+            iter([response.content]),
+            media_type=response.headers.get("content-type", "image/jpeg"),
+            headers={"Cache-Control": "max-age=86400"}
+        )
+    except Exception as e:
+        return {"error": str(e)}
 
 
 @app.get("/recommend")

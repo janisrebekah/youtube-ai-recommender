@@ -44,3 +44,20 @@ def analyze_comments(comments):
 
     # average sentiment score
     return sum(scores) / len(scores)
+
+
+# HELPFUL_KEYWORDS = ["fixed", "understood", "clear", "tutorial", "best", "explained", "working"]
+
+# def analyze_comments(comments):
+#     if not comments: return 0
+#     scores = []
+#     for comment in comments:
+#         # Standard sentiment
+#         score = analyzer.polarity_scores(comment)["compound"]
+        
+#         # Helpfulness boost
+#         if any(word in comment.lower() for word in HELPFUL_KEYWORDS):
+#             score += 0.2  # Boost the score slightly
+            
+#         scores.append(min(score, 1.0)) # Keep it capped at 1.0
+#     return sum(scores) / len(scores)

@@ -1,12 +1,35 @@
-# backend
+# Backend
 backend/venv/
+backend/env/
 backend/.env
+backend/.env.local
 backend/__pycache__/
+backend/*.pyc
+backend/*.pyo
+backend/*.egg-info/
+backend/dist/
+backend/build/
 
-# frontend
+# Frontend
 frontend/node_modules/
 frontend/dist/
+frontend/.env
+frontend/.env.local
+frontend/dist-ssr/
 
-# general
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
 .DS_Store
+Thumbs.db
+
+# Logs
 *.log
+npm-debug.log*
+yarn-debug.log*
+
